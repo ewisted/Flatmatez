@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Flatmatez.Services;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,14 +15,9 @@ namespace Flatmatez.Views.OAuth
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class LoginFlowPage : ContentPage
 	{
-		Account account;
-		AccountStore store;
-
 		public LoginFlowPage()
 		{
 			InitializeComponent();
-
-			store = AccountStore.Create();
 		}
 
 		void OnLoginClicked(object sender, EventArgs e)
@@ -42,8 +38,6 @@ namespace Flatmatez.Views.OAuth
 					break;
 			}
 
-			account = store.FindAccountsForService(Constants.AppName).FirstOrDefault();
-
 			var authenticator = new OAuth2Authenticator(
 				clientId,
 				null,
@@ -61,9 +55,10 @@ namespace Flatmatez.Views.OAuth
 
 			var presenter = new Xamarin.Auth.Presenters.OAuthLoginPresenter();
 			presenter.Login(authenticator);
+			APIService.HandleAuthStarted();
 		}
 
-		async void OnAuthCompleted(object sender, AuthenticatorCompletedEventArgs e)
+		void OnAuthCompleted(object sender, AuthenticatorCompletedEventArgs e)
 		{
 			var authenticator = sender as OAuth2Authenticator;
 			if (authenticator != null)
@@ -72,16 +67,7 @@ namespace Flatmatez.Views.OAuth
 				authenticator.Error -= OnAuthError;
 			}
 
-			if (e.IsAuthenticated)
-			{
-				if (account != null)
-				{
-					store.Delete(account, Constants.AppName);
-				}
-
-				await store.SaveAsync(account = e.Account, Constants.AppName);
-				await Navigation.PushModalAsync(new NavigationPage(new MainPage()));
-			}
+			APIService.HandleAuthComplete(sender, e);
 		}
 
 		void OnAuthError(object sender, AuthenticatorErrorEventArgs e)
