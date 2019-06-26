@@ -22,7 +22,7 @@
     <EmbeddedResource Update="Views\Billing\BillDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Billing\BillingPage.xaml">
+    <EmbeddedResource Update="Views\BillingPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Billing\NewBillPage.xaml">

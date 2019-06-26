@@ -2,9 +2,43 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Flatmatez.Views.OAuth.LoginFlowPage">
-    <ContentPage.Content>
-		<StackLayout VerticalOptions="Center">
-			<Button Text="Login" Clicked="OnLoginClicked" />
-		</StackLayout>
-	</ContentPage.Content>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*" />
+			<RowDefinition Height="200" />
+		</Grid.RowDefinitions>
+
+		<Label Text="Flatmatez" VerticalOptions="Center" HorizontalOptions="Center" Grid.Row="0" />
+
+		<Button Text="Sign In With Google" 
+				Clicked="OnLoginClicked" 
+				BackgroundColor="#4285F4"
+				TextColor="#FFFFFF"
+				HorizontalOptions="CenterAndExpand"
+				VerticalOptions="Center"
+				WidthRequest="240"
+				HeightRequest="50"
+				Padding="2,2,2,2"
+				Grid.Row="1">
+			<VisualStateManager.VisualStateGroups>
+				<VisualStateGroup x:Name="States">
+					
+					<VisualState x:Name="Normal">
+						<VisualState.Setters>
+							<Setter Property="Image" 
+									Value="btn_google_light_normal.png" />
+						</VisualState.Setters>
+					</VisualState>
+
+					<VisualState x:Name="Pressed">
+						<VisualState.Setters>
+							<Setter Property="Image" 
+									Value="btn_google_light_pressed.png" />
+						</VisualState.Setters>
+					</VisualState>
+					
+				</VisualStateGroup>
+			</VisualStateManager.VisualStateGroups>
+		</Button>
+	</Grid>
 </ContentPage>

@@ -9,17 +9,16 @@ namespace Flatmatez.Services
 	public static class APIService
 	{
 		public static event EventHandler<AuthenticatorCompletedEventArgs> OnAuthComplete;
-		public static event EventHandler OnAuthStarted;
+		public static event EventHandler OnLogout;
 
 		public static void HandleAuthComplete(object sender, AuthenticatorCompletedEventArgs e)
 		{
 			OnAuthComplete.Invoke(sender, e);
 		}
 
-		public static void HandleAuthStarted()
+		public static void HandleLogout(object sender, EventArgs e)
 		{
-			Thread.Sleep(2500);
-			OnAuthStarted.Invoke(null, new EventArgs());
+			OnLogout.Invoke(sender, e);
 		}
 	}
 }

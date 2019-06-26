@@ -43,15 +43,6 @@ namespace Flatmatez.Views
 			await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
 		}
 
-		async void Logout_Clicked(object sender, EventArgs e)
-		{
-			var store = AccountStore.Create();
-			var account = store.FindAccountsForService(Constants.AppName).FirstOrDefault();
-			await store.DeleteAsync(account, Constants.AppName);
-
-			await Navigation.PushModalAsync(new NavigationPage(new LoginFlowPage()));
-		}
-
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();

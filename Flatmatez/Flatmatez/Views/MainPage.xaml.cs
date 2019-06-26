@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Flatmatez.Services;
+using System;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -10,6 +11,11 @@ namespace Flatmatez.Views
 		public MainPage()
 		{
 			InitializeComponent();
+		}
+		
+		void Logout_Clicked(object sender, EventArgs e)
+		{
+			APIService.HandleLogout(sender, e);
 		}
 	}
 }

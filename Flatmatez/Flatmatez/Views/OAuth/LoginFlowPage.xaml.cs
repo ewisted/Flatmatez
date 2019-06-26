@@ -55,7 +55,6 @@ namespace Flatmatez.Views.OAuth
 
 			var presenter = new Xamarin.Auth.Presenters.OAuthLoginPresenter();
 			presenter.Login(authenticator);
-			APIService.HandleAuthStarted();
 		}
 
 		void OnAuthCompleted(object sender, AuthenticatorCompletedEventArgs e)

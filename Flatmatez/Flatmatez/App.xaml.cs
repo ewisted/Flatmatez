@@ -25,7 +25,6 @@ namespace Flatmatez
 			InitializeComponent();
 
 			APIService.OnAuthComplete += OnAuthCompleted;
-			APIService.OnAuthStarted += OnAuthStarted;
 
 			DependencyService.Register<MockDataStore>();
 
@@ -33,12 +32,12 @@ namespace Flatmatez
 			account = store.FindAccountsForService(Constants.AppName).FirstOrDefault();
 			if (account != null)
 			{
-				MainPage = new NavigationPage(new MainPage());
+				MainPage = new MainPage();
 				GetUserObject();
 			}
 			else
 			{
-				MainPage = new NavigationPage(new LoginFlowPage());
+				MainPage = new LoginFlowPage();
 			}
 			//MainPage = new MainPage();
 		}
@@ -56,15 +55,11 @@ namespace Flatmatez
 			}
 		}
 
-		public void OnAuthStarted(object sender, EventArgs e)
-		{
-			MainPage = new NavigationPage(new MainPage());
-		}
-
 		public async void OnAuthCompleted(object sender, AuthenticatorCompletedEventArgs e)
 		{
 			if (e.IsAuthenticated)
 			{
+				MainPage = new MainPage();
 				if (account != null)
 				{
 					store.Delete(account, Constants.AppName);
@@ -73,6 +68,14 @@ namespace Flatmatez
 				await store.SaveAsync(account = e.Account, Constants.AppName);
 				GetUserObject();
 			}
+		}
+
+		public async void OnLogout(object sender, EventArgs e)
+		{
+			await store.DeleteAsync(account, Constants.AppName);
+			User = null;
+
+			MainPage = new LoginFlowPage();
 		}
 
 		private async void GetUserObject()
@@ -89,7 +92,7 @@ namespace Flatmatez
 			}
 			else
 			{
-				MainPage = new NavigationPage(new LoginFlowPage());
+				MainPage = new LoginFlowPage();
 			}
 		}
 
