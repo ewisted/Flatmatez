@@ -146,4 +146,151 @@
       <Name>Flatmatez</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin\btn_google_dark_disabled_ios.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin\btn_google_dark_focus_ios.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin\btn_google_dark_normal_ios.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin\btn_google_dark_pressed_ios.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin\btn_google_light_disabled_ios.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin\btn_google_light_focus_ios.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin\btn_google_light_normal_ios.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin\btn_google_light_pressed_ios.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin\btn_google_signin_dark_disabled_ios.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin\btn_google_signin_dark_focus_ios.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin\btn_google_signin_dark_normal_ios.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin\btn_google_signin_dark_pressed_ios.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin\btn_google_signin_light_disabled_ios.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin\btn_google_signin_light_focus_ios.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin\btn_google_signin_light_normal_ios.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin\btn_google_signin_light_pressed_ios.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%402x\btn_google_dark_disabled_ios%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%402x\btn_google_dark_focus_ios%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%402x\btn_google_dark_normal_ios%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%402x\btn_google_dark_pressed_ios%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%402x\btn_google_light_disabled_ios%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%402x\btn_google_light_focus_ios%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%402x\btn_google_light_normal_ios%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%402x\btn_google_light_pressed_ios%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%402x\btn_google_signin_dark_disabled_ios%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%402x\btn_google_signin_dark_focus_ios%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%402x\btn_google_signin_dark_normal_ios%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%402x\btn_google_signin_dark_pressed_ios%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%402x\btn_google_signin_light_disabled_ios%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%402x\btn_google_signin_light_focus_ios%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%402x\btn_google_signin_light_normal_ios%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%402x\btn_google_signin_light_pressed_ios%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%403x\btn_google_dark_disabled_ios%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%403x\btn_google_dark_focus_ios%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%403x\btn_google_dark_normal_ios%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%403x\btn_google_dark_pressed_ios%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%403x\btn_google_light_disabled_ios%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%403x\btn_google_light_focus_ios%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%403x\btn_google_light_normal_ios%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%403x\btn_google_light_pressed_ios%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%403x\btn_google_signin_dark_disabled_ios%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%403x\btn_google_signin_dark_focus_ios%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%403x\btn_google_signin_dark_normal_ios%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%403x\btn_google_signin_dark_pressed_ios%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%403x\btn_google_signin_light_disabled_ios%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%403x\btn_google_signin_light_focus_ios%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%403x\btn_google_signin_light_normal_ios%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GoogleSignin%403x\btn_google_signin_light_pressed_ios%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default.png" />
+  </ItemGroup>
 </Project>
