@@ -15,7 +15,7 @@ namespace Flatmatez
 {
 	public partial class App : Application
 	{
-		static BillDatabase database;
+		static GroupDatabase database;
 		readonly AccountStore store;
 		static Account account;
 		public static User User { get; set; }
@@ -42,14 +42,14 @@ namespace Flatmatez
 			//MainPage = new MainPage();
 		}
 
-		public static BillDatabase Database
+		public static GroupDatabase Database
 		{
 			get
 			{
 				if (database == null)
 				{
-					database = new BillDatabase(
-						Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "UserSQLite.db3"));
+					database = new GroupDatabase(
+						Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "GroupSQLite.db3"));
 				}
 				return database;
 			}
