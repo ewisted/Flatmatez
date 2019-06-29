@@ -5,29 +5,33 @@
 			 xmlns:vm="clr-namespace:Flatmatez.ViewModels"
 			 Title="{Binding Title}">
 	
-	<!--<ContentPage.ToolbarItems>
+	<ContentPage.ToolbarItems>
 		<ToolbarItem Text="New Bill" Clicked="NewBill_Clicked" />
 	</ContentPage.ToolbarItems>
 
 	<StackLayout>
 		<ListView x:Name="UsersListView"
-                ItemsSource="{Binding Users}"
+                ItemsSource="{Binding UserDebts}"
                 VerticalOptions="FillAndExpand"
                 HasUnevenRows="true"
-                RefreshCommand="{Binding LoadItemsCommand}"
+                RefreshCommand="{Binding LoadUsersCommand}"
                 IsPullToRefreshEnabled="true"
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                 CachingStrategy="RecycleElement"
-                ItemSelected="OnItemSelected">
+                ItemSelected="OnUserSelected">
 			<ListView.ItemTemplate>
 				<DataTemplate>
 					<ViewCell>
 						<StackLayout Padding="10">
-							<Label Text="{Binding Name}" 
+							<Label Text="{Binding Username}" 
                                 LineBreakMode="NoWrap" 
                                 Style="{DynamicResource ListItemTextStyle}" 
                                 FontSize="16" />
-							<Label Text="{Binding Description}" 
+							<Label Text="{Binding FormattedOwedToUser}" 
+                                LineBreakMode="NoWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13" />
+							<Label Text="{Binding FormattedOwedFromUser}" 
                                 LineBreakMode="NoWrap"
                                 Style="{DynamicResource ListItemDetailTextStyle}"
                                 FontSize="13" />
@@ -36,5 +40,5 @@
 				</DataTemplate>
 			</ListView.ItemTemplate>
 		</ListView>
-	</StackLayout>-->
+	</StackLayout>
 </ContentPage>

@@ -5,6 +5,7 @@ using Flatmatez.Services;
 using Flatmatez.Views;
 using Flatmatez.Views.OAuth;
 using Xamarin.Auth;
+using Xamarin.Essentials;
 using System.Linq;
 using System.IO;
 using Flatmatez.Data;
@@ -16,7 +17,6 @@ namespace Flatmatez
 	public partial class App : Application
 	{
 		static GroupDatabase database;
-		readonly AccountStore store;
 		static Account account;
 		public static User User { get; set; }
 
@@ -24,12 +24,25 @@ namespace Flatmatez
 		{
 			InitializeComponent();
 
-			APIService.OnAuthComplete += OnAuthCompleted;
+			APIService.OnAuthComplete += OnAuthComplete;
+			APIService.OnLogout += OnLogout;
 
-			DependencyService.Register<MockDataStore>();
+			//DependencyService.Register<MockDataStore>();
 
-			store = AccountStore.Create();
-			account = store.FindAccountsForService(Constants.AppName).FirstOrDefault();
+			Setup();
+		}
+
+		private async void Setup()
+		{
+			try
+			{
+				account = (await SecureStorageAccountStore.FindAccountsForServiceAsync(Constants.AppName)).SingleOrDefault();
+			}
+			catch (Exception e)
+			{
+				Debug.WriteLine(e);
+			}
+
 			if (account != null)
 			{
 				MainPage = new MainPage();
@@ -39,7 +52,6 @@ namespace Flatmatez
 			{
 				MainPage = new LoginFlowPage();
 			}
-			//MainPage = new MainPage();
 		}
 
 		public static GroupDatabase Database
@@ -49,30 +61,26 @@ namespace Flatmatez
 				if (database == null)
 				{
 					database = new GroupDatabase(
-						Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "GroupSQLite.db3"));
+						Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "GroupSQLite.db3"), true);
 				}
 				return database;
 			}
 		}
 
-		public async void OnAuthCompleted(object sender, AuthenticatorCompletedEventArgs e)
+		public async void OnAuthComplete(object sender, AuthenticatorCompletedEventArgs e)
 		{
 			if (e.IsAuthenticated)
 			{
 				MainPage = new MainPage();
-				if (account != null)
-				{
-					store.Delete(account, Constants.AppName);
-				}
-
-				await store.SaveAsync(account = e.Account, Constants.AppName);
+				await SecureStorageAccountStore.SaveAsync(e.Account, Constants.AppName);
 				GetUserObject();
 			}
 		}
 
-		public async void OnLogout(object sender, EventArgs e)
+		public void OnLogout(object sender, EventArgs e)
 		{
-			await store.DeleteAsync(account, Constants.AppName);
+			SecureStorage.RemoveAll();
+
 			User = null;
 
 			MainPage = new LoginFlowPage();

@@ -9,7 +9,9 @@ namespace Flatmatez.Models
 	{
 		[ForeignKey(typeof(GroupUser))]
 		public string UserId { get; set; }
+
 		[ForeignKey(typeof(Bill))]
-		public int BillId { get; set; }
+		public string BillId { get; set; }
+
 	}
 }

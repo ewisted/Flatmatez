@@ -1,0 +1,32 @@
+{
+	"GroupId": "1",
+	"GroupName": "1525 15th Ave SE",
+	"Users": [
+		{
+			"Name": "Eric",
+			"Id": "106622196276111131309",
+			"GroupId": "1",
+			"Email": "itsatuw@gmail.com",
+			"Picture": "",
+			"Bills": [
+
+			]
+		},
+		{
+			"Name": "Denny",
+			"Id": "2",
+			"GroupId": "1",
+			"Email": "dennyha@gmail.com",
+			"Picture": "",
+			"Bills": []
+		},
+		{
+			"Name": "Eric",
+			"Id": "3",
+			"GroupId": "1",
+			"Email": "nategetachew@gmail.com",
+			"Picture": "",
+			"Bills": []
+		}
+	]
+}

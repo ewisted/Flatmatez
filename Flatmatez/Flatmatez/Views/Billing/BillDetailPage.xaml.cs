@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Flatmatez.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ namespace Flatmatez.Views.Billing
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class BillDetailPage : ContentPage
 	{
-		public BillDetailPage()
+		public BillDetailPage(Bill bill)
 		{
 			InitializeComponent();
 		}

@@ -11,8 +11,11 @@ namespace Flatmatez.Models
 	{
 		[PrimaryKey]
 		public string GroupId { get; set; }
+
 		public string GroupName { get; set; }
+
 		[OneToMany]
 		public List<GroupUser> Users { get; set; }
+
 	}
 }

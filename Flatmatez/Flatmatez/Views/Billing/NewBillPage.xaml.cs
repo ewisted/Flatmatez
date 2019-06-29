@@ -16,5 +16,10 @@ namespace Flatmatez.Views.Billing
 		{
 			InitializeComponent();
 		}
+
+		public NewBillPage(string selectedUserId)
+		{
+			InitializeComponent();
+		}
 	}
 }
