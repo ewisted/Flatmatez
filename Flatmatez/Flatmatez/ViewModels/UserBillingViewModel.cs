@@ -32,7 +32,7 @@ namespace Flatmatez.ViewModels
 			try
 			{
 				Bills.Clear();
-				var bills = await App.Database.GetCurrentBillsByUserId(SelectedUserId);
+				var bills = await App.Database.GetCurrentBillsByUserIdAsync(SelectedUserId);
 
 				foreach (var bill in bills)
 				{

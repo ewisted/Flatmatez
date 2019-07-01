@@ -61,7 +61,7 @@ namespace Flatmatez
 				if (database == null)
 				{
 					database = new GroupDatabase(
-						Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "GroupSQLite.db3"), true);
+						Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "GroupSQLite.db3"));
 				}
 				return database;
 			}

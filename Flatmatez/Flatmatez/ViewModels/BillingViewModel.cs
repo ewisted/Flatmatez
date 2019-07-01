@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using System.Linq;
+using Flatmatez.Views.Billing;
 
 namespace Flatmatez.ViewModels
 {
@@ -19,6 +20,13 @@ namespace Flatmatez.ViewModels
 			Title = "Billing";
 			UserDebts = new ObservableCollection<UserDebts>();
 			LoadUsersCommand = new Command(async () => await ExecuteLoadUsersCommand());
+
+			MessagingCenter.Subscribe<NewBillPage, Bill>(this, "AddBill", async (obj, bill) =>
+			{
+				var newBill = bill as Bill;
+				await App.Database.AddBillAsync(newBill);
+				await ExecuteLoadUsersCommand();
+			});
 		}
 
 		async Task ExecuteLoadUsersCommand()
@@ -31,7 +39,7 @@ namespace Flatmatez.ViewModels
 			try
 			{
 				UserDebts.Clear();
-				var userDebts = await App.Database.GetUserDebts();
+				var userDebts = await App.Database.GetUserDebtsAsync();
 
 				foreach (var debt in userDebts)
 				{

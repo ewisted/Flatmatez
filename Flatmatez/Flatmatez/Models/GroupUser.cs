@@ -20,8 +20,8 @@ namespace Flatmatez.Models
 		[ManyToMany(typeof(GroupUserBill))]
 		public List<Bill> Bills { get; set; }
 
-		[ForeignKey(typeof(Group))]
 		public string GroupId { get; set; }
 
+		public string GroupName { get; set; }
 	}
 }
