@@ -17,7 +17,6 @@ namespace Flatmatez
 	public partial class App : Application
 	{
 		static GroupDatabase database;
-		static Account account;
 		public static User User { get; set; }
 
 		public App()
@@ -34,6 +33,7 @@ namespace Flatmatez
 
 		private async void Setup()
 		{
+			Account account = null;
 			try
 			{
 				account = (await SecureStorageAccountStore.FindAccountsForServiceAsync(Constants.AppName)).SingleOrDefault();
@@ -46,7 +46,7 @@ namespace Flatmatez
 			if (account != null)
 			{
 				MainPage = new MainPage();
-				GetUserObject();
+				GetUserObject(account);
 			}
 			else
 			{
@@ -69,11 +69,11 @@ namespace Flatmatez
 
 		public async void OnAuthComplete(object sender, AuthenticatorCompletedEventArgs e)
 		{
-			if (e.IsAuthenticated)
+			if (e.IsAuthenticated && e.Account != null)
 			{
 				MainPage = new MainPage();
 				await SecureStorageAccountStore.SaveAsync(e.Account, Constants.AppName);
-				GetUserObject();
+				GetUserObject(e.Account);
 			}
 		}
 
@@ -86,7 +86,7 @@ namespace Flatmatez
 			MainPage = new LoginFlowPage();
 		}
 
-		private async void GetUserObject()
+		private async void GetUserObject(Account account)
 		{
 			// UserInfoUrl = https://www.googleapis.com/oauth2/v2/userinfo
 			var request = new OAuth2Request("GET", new Uri(Constants.UserInfoUrl), null, account);
