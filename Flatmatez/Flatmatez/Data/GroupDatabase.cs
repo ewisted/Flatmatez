@@ -34,7 +34,26 @@ namespace Flatmatez.Data
 
 		public Task<List<GroupUser>> GetAllGroupUsersAsync()
 		{
+			return Database.Table<GroupUser>().ToListAsync();
+		}
+
+		public Task<List<GroupUser>> GetAllGroupUsersWithChildrenAsync()
+		{
 			return Database.GetAllWithChildrenAsync<GroupUser>();
+		}
+
+		public async Task<bool> UserExistsAsync(string userId)
+		{
+			var userList = await Database.Table<GroupUser>().Where(u => u.Id == userId).ToListAsync();
+
+			if (userList.Count > 0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 		public Task<GroupUser> GetGroupUserByIdAsync(string userId)
@@ -50,6 +69,42 @@ namespace Flatmatez.Data
 		public Task<List<UserDebts>> GetUserDebtsAsync()
 		{
 			return Database.Table<UserDebts>().ToListAsync();
+		}
+
+		public async Task<DatabaseResult> NewGroup(string groupName)
+		{
+			GroupUser user;
+			try
+			{
+				user = new GroupUser()
+				{
+					Id = App.User.Id,
+					GroupName = groupName,
+					GroupId = Guid.NewGuid().ToString(),
+					Bills = new List<Bill>(),
+					Email = App.User.Email,
+					Name = App.User.Name,
+					Picture = App.User.Picture
+				};
+
+				await Database.InsertAsync(user);
+			}
+			catch (Exception e)
+			{
+				return new DatabaseResult()
+				{
+					Success = false,
+					StatusMessage = e.Message,
+					Exception = e
+				};
+			}
+
+			return new DatabaseResult()
+			{
+				Success = true,
+				StatusMessage = $"New group \"{groupName}\" has been successfully created",
+				ObjectId = user.GroupId
+			};
 		}
 
 		public async Task<DatabaseResult> AddUserAsync(GroupUser user)

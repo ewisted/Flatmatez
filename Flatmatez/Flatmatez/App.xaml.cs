@@ -69,11 +69,10 @@ namespace Flatmatez
 
 		public async void OnAuthComplete(object sender, AuthenticatorCompletedEventArgs e)
 		{
-			if (e.IsAuthenticated && e.Account != null)
+			if (e.IsAuthenticated && e.Account != null && User != null)
 			{
 				MainPage = new MainPage();
 				await SecureStorageAccountStore.SaveAsync(e.Account, Constants.AppName);
-				GetUserObject(e.Account);
 			}
 		}
 

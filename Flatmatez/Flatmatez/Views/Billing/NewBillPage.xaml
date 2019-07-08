@@ -1,12 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Flatmatez.Views.Billing.NewBillPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 mc:Ignorable="d"
+			 x:Class="Flatmatez.Views.Billing.NewBillPage"
+			 Title="New Bill">
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
+		<ToolbarItem Text="Save" Clicked="Save_Clicked" />
+	</ContentPage.ToolbarItems>
+
+	<ContentPage.Content>
+		<StackLayout Spacing="20" Padding="15">
+			<Label Text="Type" FontSize="Medium" />
+			<Picker Title="Select a type" ItemsSource="{Binding Types}" SelectedItem="{Binding Bill.Type}"/>
+
+			<Label Text="Name" FontSize="Medium" />
+			<Entry Text="{Binding Bill.Name}" FontSize="Small" />
+			
+			<Label Text="Description" FontSize="Medium" />
+			<Editor Text="{Binding Bill.Description}" FontSize="Small" Margin="0" />
+
+			<Label Text="Bill To" FontSize="Medium" />
+			<Picker Title="Select a user" ItemsSource="{Binding Users}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedUser, Mode=TwoWay}" />
+
+			<Label Text="Amount" FontSize="Medium" />
+			<Entry Keyboard="Numeric" Unfocused="Amount_Changed" Completed="Amount_Changed"/>
+
+			<Label Text="Due On" FontSize="Medium" />
+			<DatePicker MinimumDate="{Binding MinDate}" MaximumDate="{Binding MaxDate}" Date="{Binding Bill.DateDue}"
+		</StackLayout>
+	</ContentPage.Content>
 </ContentPage>

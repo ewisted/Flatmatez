@@ -5,11 +5,44 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Flatmatez.Views.GroupSetup.GroupSetupPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*" />
+			<RowDefinition Height="200" />
+		</Grid.RowDefinitions>
+
+		<Label Text="You're not a member of a group yet" 
+			   VerticalOptions="Center" 
+			   HorizontalOptions="Center" 
+			   Grid.Row="0" 
+			   FontSize="Large"/>
+
+		<Label Text="Either start a new group or join an existing one" 
+			   VerticalOptions="Center" 
+			   HorizontalOptions="Center" 
+			   Grid.Row="0" 
+			   FontSize="Large"/>
+
+		<Button Text="New Group" 
+				Clicked="OnNewClicked" 
+				HorizontalOptions="CenterAndExpand"
+				VerticalOptions="Center"
+				WidthRequest="240"
+				HeightRequest="50"
+				Padding="2,2,2,2"
+				Grid.Row="1">
+		</Button>
+
+		<Label Text="Enter Group Id" FontSize="Large" />
+		<Entry Text="{Binding GroupId}" FontSize="Large" MaxLength="36" />
+		<Button Text="Join Group" 
+				Clicked="OnJoinClicked" 
+				HorizontalOptions="CenterAndExpand"
+				VerticalOptions="Center"
+				WidthRequest="240"
+				HeightRequest="50"
+				Padding="2,2,2,2"
+				Grid.Row="1">
+		</Button>
+	</Grid>
 </ContentPage>
