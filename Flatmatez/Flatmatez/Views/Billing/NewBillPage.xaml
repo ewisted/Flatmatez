@@ -29,7 +29,7 @@
 			<Entry Keyboard="Numeric" Unfocused="Amount_Changed" Completed="Amount_Changed"/>
 
 			<Label Text="Due On" FontSize="Medium" />
-			<DatePicker MinimumDate="{Binding MinDate}" MaximumDate="{Binding MaxDate}" Date="{Binding Bill.DateDue}"
+			<DatePicker MinimumDate="{Binding MinDate}" MaximumDate="{Binding MaxDate}" Date="{Binding Bill.DateDue}" />
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

@@ -23,6 +23,32 @@ namespace Flatmatez.Data
 			Database.CreateTableAsync<UserDebts>().Wait();
 		}
 
+		public async Task<DatabaseResult> ClearData()
+		{
+			try
+			{
+				await Database.DeleteAllAsync<GroupUser>();
+				await Database.DeleteAllAsync<Bill>();
+				await Database.DeleteAllAsync<UserDebts>();
+				await Database.DeleteAllAsync<GroupUserBill>();
+			}
+			catch (Exception e)
+			{
+				return new DatabaseResult()
+				{
+					Success = false,
+					StatusMessage = e.Message,
+					Exception = e
+				};
+			}
+
+			return new DatabaseResult()
+			{
+				Success = true,
+				StatusMessage = "All database data has been cleared"
+			};
+		}
+
 		public async Task<List<Bill>> GetCurrentBillsByUserIdAsync(string selectedUserId)
 		{
 			var user = await GetGroupUserByIdAsync(App.User.Id);

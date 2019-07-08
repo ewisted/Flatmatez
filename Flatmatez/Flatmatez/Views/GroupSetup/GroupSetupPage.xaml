@@ -8,41 +8,48 @@
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*" />
-			<RowDefinition Height="200" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
-
-		<Label Text="You're not a member of a group yet" 
-			   VerticalOptions="Center" 
-			   HorizontalOptions="Center" 
-			   Grid.Row="0" 
-			   FontSize="Large"/>
-
-		<Label Text="Either start a new group or join an existing one" 
-			   VerticalOptions="Center" 
-			   HorizontalOptions="Center" 
-			   Grid.Row="0" 
-			   FontSize="Large"/>
-
-		<Button Text="New Group" 
+		<StackLayout Grid.Row="0">
+			<Label Text="You're not a member of a group yet. Either start a new group or join an existing one." 
+				VerticalOptions="CenterAndExpand" 
+				HorizontalOptions="CenterAndExpand" 
+				HorizontalTextAlignment="Center"
+				FontSize="Large"/>
+		</StackLayout>
+		<StackLayout Grid.Row="1">
+			<Label Text="Enter Group Name" 
+				FontSize="Medium" 
+				VerticalOptions="Start"/>
+			<Entry Text="{Binding GroupName}" 
+				FontSize="Medium" Grid.Row="1"
+				VerticalOptions="Center"/>
+			<Button Text="New Group" 
 				Clicked="OnNewClicked" 
 				HorizontalOptions="CenterAndExpand"
-				VerticalOptions="Center"
+				VerticalOptions="End"
 				WidthRequest="240"
 				HeightRequest="50"
-				Padding="2,2,2,2"
-				Grid.Row="1">
-		</Button>
-
-		<Label Text="Enter Group Id" FontSize="Large" />
-		<Entry Text="{Binding GroupId}" FontSize="Large" MaxLength="36" />
-		<Button Text="Join Group" 
+				Padding="2,2,2,2">
+			</Button>
+		</StackLayout>
+		<StackLayout Grid.Row="2">
+			<Label Text="Enter Group Id" 
+				FontSize="Medium" 
+				VerticalOptions="Start"/>
+			<Entry Text="{Binding GroupId}" 
+				FontSize="Medium" 
+				MaxLength="36" 
+				VerticalOptions="Center"/>
+			<Button Text="Join Group" 
 				Clicked="OnJoinClicked" 
 				HorizontalOptions="CenterAndExpand"
-				VerticalOptions="Center"
+				VerticalOptions="End"
 				WidthRequest="240"
 				HeightRequest="50"
-				Padding="2,2,2,2"
-				Grid.Row="1">
-		</Button>
+				Padding="2,2,2,2">
+			</Button>
+		</StackLayout>
 	</Grid>
 </ContentPage>

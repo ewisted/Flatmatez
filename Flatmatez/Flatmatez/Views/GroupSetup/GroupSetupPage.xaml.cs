@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Auth;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,11 +13,13 @@ namespace Flatmatez.Views.GroupSetup
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class GroupSetupPage : ContentPage
 	{
-
 		GroupSetupViewModel viewModel;
-		public GroupSetupPage()
+		private AuthenticatorCompletedEventArgs eventArgs;
+		public GroupSetupPage(AuthenticatorCompletedEventArgs args)
 		{
 			InitializeComponent();
+
+			eventArgs = args;
 
 			BindingContext = viewModel = new GroupSetupViewModel();
 		}
@@ -26,7 +28,7 @@ namespace Flatmatez.Views.GroupSetup
 		{
 			if (!string.IsNullOrWhiteSpace(viewModel.GroupName))
 			{
-				viewModel.NewGroupCommand.Execute(null);
+				viewModel.NewGroupCommand.Execute(eventArgs);
 			}
 			else
 			{
@@ -38,7 +40,7 @@ namespace Flatmatez.Views.GroupSetup
 		{
 			if (viewModel.GroupId.IsGuid())
 			{
-				viewModel.JoinGroupCommand.Execute(null);
+				viewModel.JoinGroupCommand.Execute(eventArgs);
 			}
 			else
 			{

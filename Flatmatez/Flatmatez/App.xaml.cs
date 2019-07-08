@@ -50,7 +50,7 @@ namespace Flatmatez
 			}
 			else
 			{
-				MainPage = new LoginFlowPage();
+				MainPage = new NavigationPage(new LoginFlowPage());
 			}
 		}
 
@@ -76,13 +76,15 @@ namespace Flatmatez
 			}
 		}
 
-		public void OnLogout(object sender, EventArgs e)
+		public async void OnLogout(object sender, EventArgs e)
 		{
 			SecureStorage.RemoveAll();
 
 			User = null;
 
-			MainPage = new LoginFlowPage();
+			await Database.ClearData();
+
+			MainPage = new NavigationPage(new LoginFlowPage());
 		}
 
 		private async void GetUserObject(Account account)
@@ -99,7 +101,7 @@ namespace Flatmatez
 			}
 			else
 			{
-				MainPage = new LoginFlowPage();
+				MainPage = new NavigationPage(new LoginFlowPage());
 			}
 		}
 

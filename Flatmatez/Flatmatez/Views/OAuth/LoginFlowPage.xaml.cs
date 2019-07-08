@@ -90,7 +90,7 @@ namespace Flatmatez.Views.OAuth
 					}
 					else
 					{
-						await Navigation.PushAsync(new GroupSetupPage());
+						await Navigation.PushAsync(new GroupSetupPage(e));
 					}
 				}
 				else
