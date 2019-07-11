@@ -25,7 +25,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>Flatmatez</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.companyname.Flatmatez</string>
+	<string>com.ericwisted.Flatmatez</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>UILaunchStoryboardName</key>
