@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "628135059766",
+    "firebase_url": "https://flatmatez-244504.firebaseio.com",
+    "project_id": "flatmatez-244504",
+    "storage_bucket": "flatmatez-244504.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:628135059766:android:393a4e1ecc6c6c10",
+        "android_client_info": {
+          "package_name": "com.ericwisted.Flatmatez"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "628135059766-f7elpqc8tb2s050ejdc8ek8kfsmo3bgk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ericwisted.Flatmatez",
+            "certificate_hash": "13ac10eb8d4a891fc0a844e8a1412d20b8af62cc"
+          }
+        },
+        {
+          "client_id": "628135059766-o8oq0m21840difcrjfkq6kjjo1abvabo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHAr39AhclPmtGv1FjilvFG9JV31kdb1Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "628135059766-o8oq0m21840difcrjfkq6kjjo1abvabo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "628135059766-etq612tq8icr3lo6uu1kkoa7btfruni8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ericwisted.Flatmatez"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
