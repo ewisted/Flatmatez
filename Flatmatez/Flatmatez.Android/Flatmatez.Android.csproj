@@ -64,22 +64,22 @@
     <PackageReference Include="Xamarin.Android.Support.CustomTabs" Version="28.0.0.1" />
     <PackageReference Include="Xamarin.Essentials" Version="1.2.0" />
     <PackageReference Include="Xamarin.GooglePlayServices.Auth">
-      <Version>60.1142.1</Version>
+      <Version>71.1600.0</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.GooglePlayServices.Auth.Api.Phone">
-      <Version>60.1142.1</Version>
+      <Version>71.1600.0</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.GooglePlayServices.Auth.Base">
-      <Version>60.1142.1</Version>
+      <Version>71.1600.0</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.GooglePlayServices.Base">
-      <Version>60.1142.1</Version>
+      <Version>71.1610.0</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.GooglePlayServices.Basement">
-      <Version>60.1142.1</Version>
+      <Version>71.1620.0</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.GooglePlayServices.Tasks">
-      <Version>60.1142.1</Version>
+      <Version>71.1601.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
