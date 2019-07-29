@@ -7,11 +7,13 @@ namespace Flatmatez
 	public static class Constants
 	{
 		public static string AppName = "Flatmatez";
+		public static string AppUrl = "https://flatmatez.azurewebsites.net";
 
 		// OAuth
 		// For Google login, configure at https://console.developers.google.com/
 		public static string iOSClientId = "628135059766-etq612tq8icr3lo6uu1kkoa7btfruni8.apps.googleusercontent.com";
 		public static string AndroidClientId = "628135059766-f7elpqc8tb2s050ejdc8ek8kfsmo3bgk.apps.googleusercontent.com";
+		public static string BackendAuthUrl = "https://flatmatez.azurewebsites.net/.auth/login/google";
 
 		// These values do not need changing
 		public static string Scope = "https://www.googleapis.com/auth/userinfo.email";

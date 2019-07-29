@@ -1,6 +1,8 @@
 ﻿using Flatmatez.Services;
 using Flatmatez.Views.GroupSetup;
+using Microsoft.WindowsAzure.MobileServices;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -17,9 +19,11 @@ namespace Flatmatez.Views.OAuth
 	public partial class LoginFlowPage : ContentPage
 	{
 		bool IsLoading { get; set; }
+		MobileServiceClient client { get; set; }
 		public LoginFlowPage()
 		{
 			InitializeComponent();
+			client = new MobileServiceClient(Constants.AppUrl);
 			IsLoading = false;
 		}
 
@@ -66,37 +70,41 @@ namespace Flatmatez.Views.OAuth
 
 			try
 			{
-				var authenticator = sender as OAuth2Authenticator;
-				if (authenticator != null)
+				if (sender is OAuth2Authenticator authenticator)
 				{
 					authenticator.Completed -= OnAuthCompleted;
 					authenticator.Error -= OnAuthError;
 				}
 
-				// UserInfoUrl = https://www.googleapis.com/oauth2/v2/userinfo
-				var request = new OAuth2Request("GET", new Uri(Constants.UserInfoUrl), null, e.Account);
-				var response = await request.GetResponseAsync();
-				if (response != null && response.StatusCode != System.Net.HttpStatusCode.Unauthorized)
-				{
-					// Deserialize the data and store it in the account store
-					// The users email address will be used to identify data in SimpleDB
-					string userJson = await response.GetResponseTextAsync();
-					App.User = JsonConvert.DeserializeObject<User>(userJson);
+				var token = new JObject();
+				token.Add("access_token", e.Account.Properties["access_token"]);
+				var user = await client.LoginAsync(MobileServiceAuthenticationProvider.Google, token);
+				
 
-					var userExists = await App.Database.UserExistsAsync(App.User.Id);
-					if (userExists)
-					{
-						APIService.HandleAuthComplete(sender, e);
-					}
-					else
-					{
-						await Navigation.PushAsync(new GroupSetupPage(e));
-					}
-				}
-				else
-				{
-					await DisplayAlert("Error Authenticating", await response.GetResponseTextAsync(), "OK");
-				}
+				//// UserInfoUrl = https://www.googleapis.com/oauth2/v2/userinfo
+				//var request = new OAuth2Request("GET", new Uri(Constants.UserInfoUrl), null, e.Account);
+				//var response = await request.GetResponseAsync();
+				//if (response != null && response.StatusCode != System.Net.HttpStatusCode.Unauthorized)
+				//{
+				//	// Deserialize the data and store it in the account store
+				//	// The users email address will be used to identify data in SimpleDB
+				//	string userJson = await response.GetResponseTextAsync();
+				//	App.User = JsonConvert.DeserializeObject<User>(userJson);
+
+				//	var userExists = await App.Database.UserExistsAsync(App.User.Id);
+				//	if (userExists)
+				//	{
+				//		APIService.HandleAuthComplete(sender, e);
+				//	}
+				//	else
+				//	{
+				//		await Navigation.PushAsync(new GroupSetupPage(e));
+				//	}
+				//}
+				//else
+				//{
+				//	await DisplayAlert("Error Authenticating", await response.GetResponseTextAsync(), "OK");
+				//}
 			}
 			catch (Exception ex)
 			{
@@ -110,8 +118,7 @@ namespace Flatmatez.Views.OAuth
 
 		void OnAuthError(object sender, AuthenticatorErrorEventArgs e)
 		{
-			var authenticator = sender as OAuth2Authenticator;
-			if (authenticator != null)
+			if (sender is OAuth2Authenticator authenticator)
 			{
 				authenticator.Completed -= OnAuthCompleted;
 				authenticator.Error -= OnAuthError;
