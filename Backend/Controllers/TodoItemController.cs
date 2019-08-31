@@ -1,8 +1,8 @@
 ﻿using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Config;
 using Microsoft.Azure.NotificationHubs;
-using NotificationHub.DataObjects;
-using NotificationHub.Models;
+using Flatmatez.Backend.DataObjects;
+using Flatmatez.Backend.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.OData;
 
-namespace NotificationHub.Controllers
+namespace Flatmatez.Backend.Controllers
 {
 	public class TodoItemController : TableController<TodoItem>
 	{

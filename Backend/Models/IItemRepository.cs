@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NotificationHub.Models
+namespace Flatmatez.Backend.Models
 {
 	public interface IItemRepository
 	{

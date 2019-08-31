@@ -3,9 +3,9 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Tables;
-using NotificationHub.DataObjects;
+using Flatmatez.Backend.DataObjects;
 
-namespace NotificationHub.Models
+namespace Flatmatez.Backend.Models
 {
 	public class ItemContext : DbContext
 	{

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NotificationHub.DataObjects
+namespace Flatmatez.Backend.DataObjects
 {
 	public class TodoItem : EntityData
 	{

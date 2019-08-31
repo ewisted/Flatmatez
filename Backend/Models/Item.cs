@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace NotificationHub.Models
+namespace Flatmatez.Backend.Models
 {
 	public class Item
 	{

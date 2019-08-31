@@ -7,9 +7,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Swagger;
-using NotificationHub.Models;
+using Flatmatez.Backend.Models;
 
-namespace NotificationHub
+namespace Flatmatez.Backend
 {
 	public class Startup
 	{

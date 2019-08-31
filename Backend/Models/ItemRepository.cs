@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 
-namespace NotificationHub.Models
+namespace Flatmatez.Backend.Models
 {
 	public class ItemRepository : IItemRepository
 	{
