@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NotificationHub.Models;
+using Flatmatez.Backend.Models;
 using Microsoft.Azure.NotificationHubs;
 
-namespace NotificationHub.Controllers
+namespace Flatmatez.Backend.Controllers
 {
 	[Route("api/item")]
 	[ApiController]

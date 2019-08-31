@@ -1,14 +1,7 @@
-﻿using Flatmatez.Services;
-using Flatmatez.Views.GroupSetup;
-using Microsoft.WindowsAzure.MobileServices;
-using Newtonsoft.Json;
+﻿using Microsoft.WindowsAzure.MobileServices;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Auth;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -19,16 +12,17 @@ namespace Flatmatez.Views.OAuth
 	public partial class LoginFlowPage : ContentPage
 	{
 		bool IsLoading { get; set; }
-		MobileServiceClient client { get; set; }
+
 		public LoginFlowPage()
 		{
 			InitializeComponent();
-			client = new MobileServiceClient(Constants.AppUrl);
 			IsLoading = false;
 		}
 
 		void OnLoginClicked(object sender, EventArgs e)
 		{
+			if (IsLoading || IsBusy) return;
+
 			string clientId = null;
 			string redirectUri = null;
 
@@ -78,8 +72,7 @@ namespace Flatmatez.Views.OAuth
 
 				var token = new JObject();
 				token.Add("access_token", e.Account.Properties["access_token"]);
-				var user = await client.LoginAsync(MobileServiceAuthenticationProvider.Google, token);
-				
+				var user = await App.Client.LoginAsync(MobileServiceAuthenticationProvider.Google, token);
 
 				//// UserInfoUrl = https://www.googleapis.com/oauth2/v2/userinfo
 				//var request = new OAuth2Request("GET", new Uri(Constants.UserInfoUrl), null, e.Account);

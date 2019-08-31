@@ -11,12 +11,15 @@ using System.IO;
 using Flatmatez.Data;
 using Newtonsoft.Json;
 using System.Diagnostics;
+using Microsoft.WindowsAzure.MobileServices;
+using Newtonsoft.Json.Linq;
 
 namespace Flatmatez
 {
 	public partial class App : Application
 	{
 		static GroupDatabase database;
+		static MobileServiceClient client;
 		public static User User { get; set; }
 
 		public App()
@@ -51,6 +54,18 @@ namespace Flatmatez
 			else
 			{
 				MainPage = new NavigationPage(new LoginFlowPage());
+			}
+		}
+
+		public static MobileServiceClient Client
+		{
+			get
+			{
+				if (client == null)
+				{
+					client = new MobileServiceClient(Constants.AppUrl);
+				}
+				return client;
 			}
 		}
 
