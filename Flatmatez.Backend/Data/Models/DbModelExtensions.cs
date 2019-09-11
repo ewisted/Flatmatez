@@ -9,7 +9,7 @@ namespace Flatmatez.Backend.Data.Models
 {
 	public static class DbModelExtensions
 	{
-		public static T MergeFromDTO<T>(this T model, object DTO)
+		public static T MergeFromDTO<T>(this T model, object DTO) where T : DbModelBase
 		{
 			var commonProps = from modelProp in model.GetType().GetProperties()
 							  from dtoProp in DTO.GetType().GetProperties()

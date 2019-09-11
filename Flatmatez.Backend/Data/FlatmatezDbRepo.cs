@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using Flatmatez.Backend.Data.Abstractions;
 using Flatmatez.Backend.Data.Exceptions;
 using Flatmatez.Backend.Data.Models;
 using Flatmatez.Common.Models.DTOs;
 using Flatmatez.Common.Models.Sync;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Flatmatez.Backend.Data
 {
-	public class FlatmatezDbRepo
+	public class FlatmatezDbRepo : IFlatmatezDbRepo
 	{
 		private readonly FlatmatezDbContext _context;
 		private readonly IMapper _mapper;
@@ -23,22 +25,42 @@ namespace Flatmatez.Backend.Data
 		}
 
 		// Create methods
-		public async Task<Group> AddNewGroup(string groupName)
+		public async Task<string> AddNewGroup(string groupName)
 		{
 			var group = new Group()
 			{
 				Id = new Guid().ToString(),
 				Name = groupName,
-				GroupUsers = new List<GroupUser>(),
-				CreatedAt = DateTime.UtcNow,
-				ModifiedAt = DateTime.UtcNow,
-				MarkedForDeletion = false
+				GroupUsers = new List<GroupUser>()
 			};
 
 			await _context.Groups.AddAsync(group);
 			await _context.SaveChangesAsync();
-			return group;
+			return group.Id;
 		}
+
+		public async Task<GroupUserDTO> AddUserToGroup(string groupId, GroupUserDTO user)
+		{
+			var group = await _context.Groups.FindAsync(groupId);
+			if (group != null)
+			{
+				user.Id = new Guid().ToString();
+				user.GroupName = group.Name;
+				user.GroupId = group.Id;
+				user.LastSync = DateTime.UtcNow;
+			}
+			var groupUser = _mapper.Map<GroupUser>(user);
+			groupUser.Group = group;
+			groupUser.UserBills = new List<GroupUserBill>();
+
+			group.GroupUsers.Add(groupUser);
+			_context.Groups.Update(group);
+			await _context.GroupUsers.AddAsync(groupUser);
+			await _context.SaveChangesAsync();
+
+			return user;
+		}
+
 		public async Task<BillDTO> AddNewBill(BillDTO billDTO)
 		{
 			billDTO.Id = new Guid().ToString();
@@ -237,6 +259,18 @@ namespace Flatmatez.Backend.Data
 			_context.Update<T>(obj);
 			await _context.SaveChangesAsync();
 			return obj;
+		}
+
+		public async Task ClearMarkedObjectsFromDb()
+		{
+			var groups = _context.Groups.Where(g => g.MarkedForDeletion);
+			var users = _context.GroupUsers.Where(gu => gu.MarkedForDeletion);
+			var bills = _context.Bills.Where(b => b.MarkedForDeletion);
+
+			_context.Groups.RemoveRange(groups);
+			_context.GroupUsers.RemoveRange(users);
+			_context.Bills.RemoveRange(bills);
+			await _context.SaveChangesAsync();
 		}
 	}
 }

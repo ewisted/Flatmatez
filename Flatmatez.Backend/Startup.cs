@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-using Flatmatez.Backend.Models;
+using Flatmatez.Backend.Data.Abstractions;
 using Flatmatez.Backend.Data;
 using AutoMapper;
 
@@ -36,7 +36,7 @@ namespace Flatmatez.Backend
 			services.AddDbContext<FlatmatezDbContext>(options =>
 				options.UseSqlServer(Configuration.GetConnectionString("FlatmatezDbContext")));
 
-			services.AddTransient<FlatmatezDbRepo>();
+			services.AddTransient<IFlatmatezDbRepo>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

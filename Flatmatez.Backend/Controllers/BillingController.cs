@@ -10,6 +10,7 @@ using Flatmatez.Backend.Data;
 using Flatmatez.Backend.Data.Models;
 using Flatmatez.Common.Models.Sync;
 using AutoMapper;
+using Flatmatez.Backend.Data.Abstractions;
 
 namespace Flatmatez.Backend.Controllers
 {
@@ -17,27 +18,13 @@ namespace Flatmatez.Backend.Controllers
 	[ApiController]
 	public class BillingController : ControllerBase
 	{
-		private readonly FlatmatezDbRepo _repo;
+		private readonly IFlatmatezDbRepo _repo;
 		private readonly IMapper _mapper;
 
-		public BillingController(FlatmatezDbRepo repo, IMapper mapper)
+		public BillingController(IFlatmatezDbRepo repo, IMapper mapper)
 		{
 			_repo = repo;
 			_mapper = mapper;
-		}
-
-		// GET: api/Billing
-		[HttpGet("{userId}")]
-		public async Task<ActionResult<SyncResponse>> SyncRequest(string userId)
-		{
-			var response = await _repo.GetSyncChangesForUser(userId);
-
-			if (response == null)
-			{
-				return NotFound();
-			}
-
-			return Ok(response);
 		}
 
 		// GET: api/Billing/5

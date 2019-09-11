@@ -23,7 +23,11 @@ namespace Flatmatez.Backend.MapperProfiles
 					x.ModifiedAt,
 					opt => opt.Ignore())
 				.ForMember(x =>
-					x.)
+					x.Group,
+					opt => opt.Ignore())
+				.ForMember(x =>
+					x.UserBills,
+					opt => opt.Ignore());
 		}
 	}
 }
