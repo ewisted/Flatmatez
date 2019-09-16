@@ -1,0 +1,29 @@
+[
+    {
+        "name": "Aeriela Glasard",
+        "id": "5231aee5-0c16-4edf-a55b-72a11d94125b",
+        "email": "aglasard0@sogou.com",
+        "picture": "https://robohash.org/aliasquiasimilique.jpg?size=50x50&set=set1",
+        "groupId": "a0c13bc4-a6ab-40e5-b790-286b9f143736",
+        "groupName": "Test Group",
+        "lastSync": "2019-09-01T03:40:46Z"
+    },
+    {
+        "name": "Smith Petera",
+        "id": "192b96b5-faf4-4c5b-b3bf-d0be5ebc605c",
+        "email": "spetera1@walmart.com",
+        "picture": "https://robohash.org/sapienteidarchitecto.jpg?size=50x50&set=set1",
+        "groupId": "a0c13bc4-a6ab-40e5-b790-286b9f143736",
+        "groupName": "Test Group",
+        "lastSync": "2019-08-25T12:40:08Z"
+    },
+    {
+        "name": "Aubert Clubley",
+        "id": "59937dfb-ca59-43ff-b6dc-62d03c726033",
+        "email": "aclubley2@amazon.co.uk",
+        "picture": "https://robohash.org/maximesedminima.jpg?size=50x50&set=set1",
+        "groupId": "a0c13bc4-a6ab-40e5-b790-286b9f143736",
+        "groupName": "Test Group",
+        "lastSync": "2019-09-09T05:27:20Z"
+    }
+]

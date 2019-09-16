@@ -4,6 +4,7 @@ using Flatmatez.Common.Models.Sync;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Flatmatez.Backend.Data.Abstractions
@@ -12,6 +13,7 @@ namespace Flatmatez.Backend.Data.Abstractions
 	{
 		// Create methods
 		Task<string> AddNewGroup(string groupName);
+		Task<bool> AddGroup(Group group);
 		Task<GroupUserDTO> AddUserToGroup(string groupId, GroupUserDTO user);
 		Task<BillDTO> AddNewBill(BillDTO billDTO);
 		// Read methods
@@ -24,7 +26,7 @@ namespace Flatmatez.Backend.Data.Abstractions
 		Task UpdateUser(GroupUserDTO user);
 		Task UpdateBill(BillDTO bill);
 		// Delete methods
-		Task<T> MarkObjectForDeletionByGUID<T>(string id) where T : DbModelBase;
-		Task ClearMarkedObjectsFromDb();
+		Task<T> MarkObjectForDeletionByGUID<T>(string id, CancellationToken token = default) where T : DbModelBase;
+		Task ClearMarkedObjectsFromDb(CancellationToken token = default);
 	}
 }

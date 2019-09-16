@@ -9,6 +9,7 @@ namespace Flatmatez.Backend.Data.Models
 		public string Name { get; set; }
 
 		public string Id { get; set; }
+		public string GroupId { get; set; }
 
 		public Group Group { get; set; }
 
@@ -17,10 +18,6 @@ namespace Flatmatez.Backend.Data.Models
 		public string Picture { get; set; }
 
 		public ICollection<GroupUserBill> UserBills { get; set; }
-
-		public string GroupId { get; set; }
-
-		public string GroupName { get; set; }
 
 		public DateTime LastSync { get; set; }
 	}

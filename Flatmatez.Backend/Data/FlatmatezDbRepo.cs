@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Flatmatez.Backend.Data
@@ -37,6 +38,20 @@ namespace Flatmatez.Backend.Data
 			await _context.Groups.AddAsync(group);
 			await _context.SaveChangesAsync();
 			return group.Id;
+		}
+
+		public async Task<bool> AddGroup(Group group)
+		{
+			try
+			{
+				_context.Groups.Add(group);
+				await _context.SaveChangesAsync();
+				return true;
+			}
+			catch
+			{
+				return false;
+			}
 		}
 
 		public async Task<GroupUserDTO> AddUserToGroup(string groupId, GroupUserDTO user)
@@ -167,33 +182,56 @@ namespace Flatmatez.Backend.Data
 			// Only execute the queries in this if statement when there are bills to be synced
 			if (billsToSync != null && billsToSync.Count() > 0)
 			{
-				// The only contition that isn't checked is records that were created and deleted after the last sync, which we want to ignore
-				// If the record was created after the last sync, and its not marked for deletion, it goes in new
-				billData.New = billsToSync
-					.Where(b => b.CreatedAt > timeOfLastSync && !b.MarkedForDeletion)
-					.Select(b => _mapper.Map<BillDTO>(b));
-				// If the client already has the record, and its marked for deletion, it goes in deleted
-				billData.Deleted = billsToSync
-					.Where(b => b.CreatedAt < timeOfLastSync && b.MarkedForDeletion)
-					.Select(b => _mapper.Map<BillDTO>(b));
-				// If the client already has the record, and its not marked for deletion, it goes in updated
-				billData.Updated = billsToSync
-					.Where(b => b.CreatedAt < timeOfLastSync && !b.MarkedForDeletion)
-					.Select(b => _mapper.Map<BillDTO>(b));
+				foreach (var b in billsToSync)
+				{
+					// The only contition that isn't checked is records that were created and deleted after the last sync, which we want to ignore
+					// If the record was created after the last sync, and its not marked for deletion, it goes in new
+
+					// New
+					if (b.CreatedAt > timeOfLastSync && !b.MarkedForDeletion)
+					{
+						billData.New.Add(_mapper.Map<BillDTO>(b));
+						continue;
+					}
+					// Updated
+					if (b.CreatedAt < timeOfLastSync && b.MarkedForDeletion)
+					{
+						billData.Updated.Add(_mapper.Map<BillDTO>(b));
+						continue;
+					}
+					// Deleted
+					if (b.CreatedAt < timeOfLastSync && !b.MarkedForDeletion)
+					{
+						billData.Deleted.Add(_mapper.Map<BillDTO>(b));
+						continue;
+					}
+				}
 			}
 
 			// Same as above, but for users
 			if (usersToSync != null && usersToSync.Count() > 0)
 			{
-				userData.New = usersToSync
-					.Where(u => u.CreatedAt > timeOfLastSync && !u.MarkedForDeletion)
-					.Select(u => _mapper.Map<GroupUserDTO>(u));
-				userData.Deleted = usersToSync
-					.Where(u => u.CreatedAt < timeOfLastSync && u.MarkedForDeletion)
-					.Select(u => _mapper.Map<GroupUserDTO>(u));
-				userData.Updated = usersToSync
-					.Where(u => u.CreatedAt < timeOfLastSync && !u.MarkedForDeletion)
-					.Select(u => _mapper.Map<GroupUserDTO>(u));
+				foreach (var u in usersToSync)
+				{
+					// New
+					if (u.CreatedAt > timeOfLastSync && !u.MarkedForDeletion)
+					{
+						userData.New.Add(_mapper.Map<GroupUserDTO>(u));
+						continue;
+					}
+					// Updated
+					if (u.CreatedAt < timeOfLastSync && u.MarkedForDeletion)
+					{
+						userData.Updated.Add(_mapper.Map<GroupUserDTO>(u));
+						continue;
+					}
+					// Deleted
+					if (u.CreatedAt < timeOfLastSync && !u.MarkedForDeletion)
+					{
+						userData.Deleted.Add(_mapper.Map<GroupUserDTO>(u));
+						continue;
+					}
+				}
 			}
 
 			return new SyncResponse()
@@ -251,17 +289,17 @@ namespace Flatmatez.Backend.Data
 		}
 
 		// Delete method
-		public async Task<T> MarkObjectForDeletionByGUID<T>(string id) where T : DbModelBase
+		public async Task<T> MarkObjectForDeletionByGUID<T>(string id, CancellationToken token = default) where T : DbModelBase
 		{
 			T obj = await _context.FindAsync<T>(id);
 			obj.MarkedForDeletion = true;
 
 			_context.Update<T>(obj);
-			await _context.SaveChangesAsync();
+			await _context.SaveChangesAsync(token);
 			return obj;
 		}
 
-		public async Task ClearMarkedObjectsFromDb()
+		public async Task ClearMarkedObjectsFromDb(CancellationToken token = default)
 		{
 			var groups = _context.Groups.Where(g => g.MarkedForDeletion);
 			var users = _context.GroupUsers.Where(gu => gu.MarkedForDeletion);
@@ -270,7 +308,7 @@ namespace Flatmatez.Backend.Data
 			_context.Groups.RemoveRange(groups);
 			_context.GroupUsers.RemoveRange(users);
 			_context.Bills.RemoveRange(bills);
-			await _context.SaveChangesAsync();
+			await _context.SaveChangesAsync(token);
 		}
 	}
 }
